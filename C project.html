@@ -59,7 +59,9 @@ int DSUF = True;   //DanceSuccessFlag
 int DF;   //DanceFail
 int DG = 0;   //DanceGet
 double timer = 60;  //타이머(조정가능)
-
+int button = 0;
+int button1 = 1;
+int check = 0;
 
 //함수 머리 
 void gotoxy(int x, int y);
@@ -73,6 +75,11 @@ void DanceKeyinput(void);
 void DanceEnd(void);
 void Reset_DanceBoardCpy(void);
 void CursorView(void);
+void buttonprint();
+void buttonprint1();
+void printboard();
+void buttonmove();
+void end();
 
 //메인 함수
 int main(void)
@@ -85,7 +92,12 @@ int main(void)
     system("cls");
     system("mode con:cols=100 lines=30");
 
-        {
+    while (1) {
+        printboard();
+        buttonmove();
+        if (GetAsyncKeyState(VK_RETURN) && (button1 == 1)) {
+            gotoxy(19,15); printf("5second after start");
+            Sleep(5000);
             DanceMap();
             while (1) {
                 DanceTimer();
@@ -100,7 +112,13 @@ int main(void)
                     break;
             }
             DanceEnd();
+            break;
         }
+        if (GetAsyncKeyState(VK_RETURN) && (button == 1)) {
+            end();
+            break;
+        }
+    }
 }
 
 //함수 본체
@@ -384,40 +402,6 @@ void CursorView(void)
     cursorInfo.bVisible = FALSE; //커서 Visible TRUE(보임) FALSE(숨김)
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-int button = 0;
-int button1 = 1;
-int check = 0;
-void buttonprint();
-void buttonprint1();
-void printboard();
-void buttonmove();
-/*
 void buttonprint() {
     if (button == 0) {
         printf("■");
@@ -456,9 +440,8 @@ void buttonmove() {
             break;
         }
     }
-}*/
-    //while (1) {
-        //printboard();
-        //buttonmove();
-   //}
-C languge project
+}
+void end() {
+    system("cls");
+    printf("good bye");
+}
