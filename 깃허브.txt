@@ -1,0 +1,16 @@
+깃허브 소스코드 올리기
+처음 업로드
+1. 터미널 열기
+2. git init
+3. (git add . , git add index.(html or css))
+4. git commit -m " [name] "
+5. git remote add origin https://github.com/joengsejun/clear.git      (clear 에 저장)
+6. git push origin master
+
+데이터 더하기
+1. git add .
+2. git commit -m " [name] "
+3. git push origin master
+
+연결된 깃허브 주소지우기
+git remote remove origin

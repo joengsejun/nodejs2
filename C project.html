@@ -1,0 +1,464 @@
+//해더파일
+#include<stdio.h>
+#include<Windows.h>
+#include<time.h>
+#include<conio.h>
+#include<stdlib.h>
+
+//define 고정값
+
+//키보드 아스키코드
+#define LEFT 75
+#define RIGHT 77
+#define UP 72
+#define DOWN 80
+
+//댄스맵 x,y값
+#define DM_X 39
+#define DM_Y 4
+
+#define Void 0 //공백
+#define True 1 //참일떄
+#define False 0  //거짓일때1
+#define Fail 200 //거짓일때2
+
+//화살표
+int DanceBlocks[4][4][4] = {
+    //위
+    { 0,UP,0,0,
+    UP,UP,UP,0,
+    0,1,0,0,
+    0,1,0,0 },
+    //아래
+    { 0,1,0,0,
+    0,1,0,0,
+    DOWN,DOWN,DOWN,0,
+    0,DOWN,0,0 },
+    //왼쪽
+    { 0,LEFT,0,0,
+    LEFT,LEFT,1,1,
+    0,LEFT,0,0,
+    0,0,0,0 },
+    //오른쪽
+    { 0,0,RIGHT,0,
+    1,1,RIGHT,RIGHT,
+    0,0,RIGHT,0,
+    0,0,0,0 }
+};
+
+//전역변수
+int DB[DM_Y + 1][DM_X + 1] = { 0, };  //DanceBoread
+int DBCPY[DM_Y + 1][DM_X + 1];  //DanceBoreadCpy[DanceBoread_Y+1][DanceBoread_X+1]
+int DS[8] = { 0, };  //DanceSave
+int DT;  //DanceType
+int keyinput;  //키입력
+int D_X, D_Y;  //Dance_X, Dance_Y
+int DSU = 0;   //DanceSuccess
+int DSF = 0;   //DanceFail
+int DSUF = True;   //DanceSuccessFlag 
+int DF;   //DanceFail
+int DG = 0;   //DanceGet
+double timer = 60;  //타이머(조정가능)
+
+
+//함수 머리 
+void gotoxy(int x, int y);
+void DanceOutput(void);
+int DanceTimer(void);
+void DanceMap(void);
+void DanceDrow(void);
+int DanceRound(void);
+void DanceBreak(int Keyinput, int num);
+void DanceKeyinput(void);
+void DanceEnd(void);
+void Reset_DanceBoardCpy(void);
+void CursorView(void);
+
+//메인 함수
+int main(void)
+{
+    keyinput = 0;
+
+    CursorView();
+    srand(time(NULL));
+    Reset_DanceBoardCpy();
+    system("cls");
+    system("mode con:cols=100 lines=30");
+
+        {
+            DanceMap();
+            while (1) {
+                DanceTimer();
+                if (DanceTimer() == Fail)
+                    break;
+                if (DSUF == True) {
+                    DanceOutput();
+                }
+                DanceKeyinput();
+                DanceDrow();
+                if (DSU == 20)
+                    break;
+            }
+            DanceEnd();
+        }
+}
+
+//함수 본체
+void gotoxy(int x, int y)
+{
+    COORD pos = { 2 * x,y };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+void DanceOutput(void) {
+
+    int i, j, k;
+
+    D_X = 1;
+    D_Y = 4;
+
+    for (k = 0; k < DanceRound(); k++) {
+        DT = rand() % 4;
+        switch (DT) {
+        case 0:
+            DS[k] = UP;
+            break;
+        case 1:
+            DS[k] = DOWN;
+            break;
+        case 2:
+            DS[k] = LEFT;
+            break;
+        case 3:
+            DS[k] = RIGHT;
+            break;
+        }
+
+        for (i = 0; i <= 3; i++) {
+            for (j = 0; j <= 3; j++) {
+                if (DanceBlocks[DT][i][j] >= 1) {
+                    DB[i][j + (5 * k)] = DanceBlocks[DT][i][j];
+                }
+            }
+        }
+    }
+    DSUF = False;
+}
+int DanceTimer(void)
+{
+
+    timer -= 0.01;
+    Sleep(10);
+    if (timer > 0) {
+        gotoxy(19, 0); printf("시간: %.2lf초", timer);
+    }
+    else if (timer <= 0) {
+        gotoxy(19, 0); printf("시간: 0.00초");
+    }
+    if (timer <= 0)
+        return Fail;
+}
+void Reset_DanceBoardCpy(void) {
+    int i, j;
+
+    for (i = 0; i <= DM_Y; i++) {
+        for (j = 0; j <= DM_X; j++) {
+            DBCPY[i][j] = 100;
+        }
+    }
+}
+void DanceMap(void) {
+    //맵만들기
+    gotoxy(0, 0);  printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n");
+    gotoxy(0, 1);  printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ\n");
+    gotoxy(0, 12); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■ㅤㅤㅤ\n");
+    gotoxy(0, 13); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■ㅤㅤ\n");
+    gotoxy(0, 14); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■ㅤ\n");
+    gotoxy(0, 15); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■\n");
+    gotoxy(0, 16); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■\n");
+    gotoxy(0, 17); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■■■■\n");
+    gotoxy(0, 18); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■■\n");
+    gotoxy(0, 19); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■\n");
+    gotoxy(0, 20); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■\n");
+    gotoxy(0, 21); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 22); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 23); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 24); printf("ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 25); printf("ㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 26); printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 27); printf("ㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤㅤ■ㅤㅤㅤㅤㅤ■ㅤㅤ■■■■■■■■■■■■■\n");
+    gotoxy(0, 28); printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+    gotoxy(0, 29); printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+    gotoxy(0, 30); printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+}
+void DanceDrow(void) {
+
+    int i, j;
+    for (i = 0; i <= DM_X; i++) {
+        for (j = 0; j <= DM_Y; j++) {
+            if (DB[j][i] != DBCPY[j][i]) {
+                gotoxy(D_X + i, D_Y + j);
+                switch (DB[j][i])
+                {
+                case UP:
+                    printf("▲");
+                    break;
+                case DOWN:
+                    printf("▼");
+                    break;
+                case LEFT:
+                    printf("◀");
+                    break;
+                case RIGHT:
+                    printf("▶");
+                    break;
+                case 1:
+                    printf("■");
+                    break;
+                case Void:
+                    printf("  ");
+                    break;
+                }
+            }
+        }
+    }
+    gotoxy(35, 0); printf("성공횟수: %2d", DSU);
+    gotoxy(43, 0); printf("실패횟수: %2d", DF);
+
+    for (i = 0; i <= DM_X; i++) {
+        for (j = 0; j <= DM_Y; j++) {
+            DBCPY[j][i] = DB[j][i];
+        }
+    }
+
+}
+int DanceRound(void) {
+
+    if (0 <= DSU && DSU < 5) {
+        return 4;
+    }
+    else if (5 <= DSU && DSU < 10) {
+        return 6;
+    }
+    else if (10 <= DSU && DSU < 15) {
+        return 7;
+    }
+    else if (15 <= DSU && DSU < 20) {
+        return 8;
+    }
+}
+void DanceBreak(int Keyinput, int num) {
+
+    int i, j, k;
+
+    if (Keyinput == True) {
+        for (i = 0; i <= 3; i++) {
+            for (j = 0; j <= 3; j++) {
+                if (DB[i][j + (5 * num)] >= 1)
+                    DB[i][j + (5 * num)] = Void;
+            }
+        }
+        DG += 1;
+    }
+
+    if (Keyinput == False)
+    {
+        for (k = 0; k < DanceRound(); k++) {
+            switch (DS[k]) {
+            case UP:
+                for (i = 0; i <= 3; i++) {
+                    for (j = 0; j <= 3; j++) {
+                        DB[i][j + (5 * k)] = DanceBlocks[0][i][j];
+                    }
+                }
+                for (i = 0; i <= 3; i++) {
+                    for (j = 0; j <= 3; j++) {
+                        if (DanceBlocks[0][i][j] >= 1)
+                            DB[i][j + (5 * k)] = DanceBlocks[0][i][j];
+                    }
+                }
+                break;
+            case DOWN:
+                for (i = 0; i <= 3; i++) {
+                    for (j = 0; j <= 3; j++) {
+                        if (DanceBlocks[1][i][j] >= 1)
+                            DB[i][j + (5 * k)] = DanceBlocks[1][i][j];
+                    }
+                }
+                break;
+            case LEFT:
+                for (i = 0; i <= 3; i++) {
+                    for (j = 0; j <= 3; j++) {
+                        if (DanceBlocks[2][i][j] >= 1)
+                            DB[i][j + (5 * k)] = DanceBlocks[2][i][j];
+                    }
+                }
+                break;
+            case RIGHT:
+                for (i = 0; i <= 3; i++) {
+                    for (j = 0; j <= 3; j++) {
+                        if (DanceBlocks[3][i][j] >= 1)
+                            DB[i][j + (5 * k)] = DanceBlocks[3][i][j];
+                    }
+                }
+                break;
+            }
+        }
+        DG = 0;
+    }
+}
+void DanceKeyinput(void) {
+
+    keyinput = 0;
+
+    if (_kbhit()) {
+
+        keyinput = _getch();
+
+        switch (keyinput) {
+        case UP:
+            if (DS[DG] == UP) {
+                DanceBreak(True, DG);
+            }
+            else if (DS[DG] != UP) {
+                DanceBreak(False, DG);
+                timer -= 1;
+                DF += 1;
+            }
+            break;
+        case DOWN:
+            if (DS[DG] == DOWN) {
+                DanceBreak(True, DG);
+            }
+            else if (DS[DG] != DOWN) {
+                DanceBreak(False, DG);
+                timer -= 1;
+                DF += 1;
+            }
+            break;
+        case LEFT:
+            if (DS[DG] == LEFT) {
+                DanceBreak(True, DG);
+            }
+            else if (DS[DG] != LEFT) {
+                DanceBreak(False, DG);
+                timer -= 1;
+                DF += 1;
+            }
+            break;
+        case RIGHT:
+            if (DS[DG] == RIGHT) {
+                DanceBreak(True, DG);
+            }
+            else if (DS[DG] != RIGHT) {
+                DanceBreak(False, DG);
+                timer -= 1;
+                DF += 1;
+            }
+            break;
+        }
+    }
+
+    if (DG == DanceRound()) {
+        ++DSU;
+        DG = 0;
+        DSUF = True;
+    }
+}
+void DanceEnd(void) {
+
+    if (timer <= 0)
+    {
+        system("cls");
+        //엔딩크래딧(실패)
+    }
+    if (timer > 0) {
+        system("cls");
+        //엔딩크래딧(성공)
+    }
+    Sleep(1500);
+}
+void CursorView(void)
+{
+    CONSOLE_CURSOR_INFO cursorInfo = { 0, };
+    cursorInfo.dwSize = 1; //커서 굵기 (1 ~ 100)
+    cursorInfo.bVisible = FALSE; //커서 Visible TRUE(보임) FALSE(숨김)
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int button = 0;
+int button1 = 1;
+int check = 0;
+void buttonprint();
+void buttonprint1();
+void printboard();
+void buttonmove();
+/*
+void buttonprint() {
+    if (button == 0) {
+        printf("■");
+    }
+    else {
+        printf("□");
+    }
+}
+void buttonprint1() {
+    if (button1 == 0) {
+        printf("■");
+    }
+    else {
+        printf("□");
+    }
+}
+void printboard() {
+    system("mode con:cols=100 lines=30");
+    gotoxy(19, 20); printf("start");
+    gotoxy(26, 20); printf("end");
+    gotoxy(22, 20); buttonprint();
+    gotoxy(28, 20); buttonprint1();
+}
+void buttonmove() {
+    int keyinput = 0;
+    if (kbhit()) {
+        keyinput = getch();
+        switch (keyinput) {
+        case RIGHT:
+            button = 1;
+            button1 = 0;
+            break;
+        case LEFT:
+            button = 0;
+            button1 = 1;
+            break;
+        }
+    }
+}*/
+    //while (1) {
+        //printboard();
+        //buttonmove();
+   //}
+C languge project
