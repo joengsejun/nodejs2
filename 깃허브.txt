@@ -2,8 +2,8 @@
 처음 업로드
 1. 터미널 열기
 2. git init
-3. (git add . , git add index.(html or css))
-4. git commit -m " [name] "
+3. git add . , git add index.(html or css)
+4. git commit -m "name"
 5. git remote add origin https://github.com/joengsejun/clear.git      (clear 에 저장)
 6. git push origin master
 
