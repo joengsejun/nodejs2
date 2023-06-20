@@ -15,6 +15,11 @@ margin 태그와 태그사이의 여백
 <img src="coding" width="100%"> 이미지태그
 속성 Attribute 는 위치는 상관없다 태그의 이름만으로
 정보가 부족할때 속성을 사용하여 더많은 의미를 부과할수있다.
+<parent> (부모태그)
+    <child> (자식태그)
+    </child>
+<parent>
+
 
 이론
 
