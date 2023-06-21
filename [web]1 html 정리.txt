@@ -18,10 +18,25 @@ margin 태그와 태그사이의 여백
 <parent> (부모태그)
     <child></child> (자식태그)
 <parent>
-
+<ol> 리스트작석(넘버링) {ordered list}
+<ul> 리스트작석 {unordered list}
+표작성
+<table>
+    <tr>
+        <td>a</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>b</td>
+        <td>2</td>
+    </tr>
+</table>
+<title></title>  title태그로 웹페이지의 제목을 정할수있다
+<meta charset="utf-8">  로한글을 나오게할수있다.
+본문은 <body>로
+본문을 설명하는코드는 <head> 태그로
+<head> 와 <body> 태그를 <html>태그로 묵으면 html 파일이라지정
+<html>태그전에 <!DOCTYPE html>을 적어주면 html파일이다 라는말
 
 
 이론
-
-
-accessiblity 접근성

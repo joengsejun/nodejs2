@@ -58,11 +58,13 @@ int DSF = 0;   //DanceFail
 int DSUF = True;   //DanceSuccessFlag 
 int DF;   //DanceFail
 int DG = 0;   //DanceGet
-double timer = 45;  //타이머(조정가능)
+double timer = 30;  //타이머(조정가능)
 int button = 1;
 int button1 = 0;
+int button2 = 0;
 int check = 0;
 int maps = 0;
+int options = 0;
 
 //함수 머리 
 void gotoxy(int x, int y);
@@ -85,6 +87,8 @@ void Loadingmap(void);
 void logo();
 void StartLogo();
 void Mainmap();
+void option();
+void buttonprint2();
 void ColorSet(int backColor, int textColor)
 {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -125,7 +129,7 @@ int main(void)
     while (1) {
         printboard();
         buttonmove();
-        if (GetAsyncKeyState(VK_RETURN) && (button1 == 0)) {
+        if (GetAsyncKeyState(VK_RETURN) && (button == 1)) {
             Loadingmap();
             DanceMap();
             while (1) {
@@ -143,7 +147,10 @@ int main(void)
             DanceEnd();
             break;
         }
-        if (GetAsyncKeyState(VK_RETURN) && (button == 0)) {
+        if (GetAsyncKeyState(VK_RETURN) && (button2 == 1)) {
+            option();
+        }
+        if (GetAsyncKeyState(VK_RETURN) && (button1 == 1)) {
             StartLogo();
             break;
         }
@@ -272,11 +279,11 @@ void DanceDrow(void) {
     gotoxy(35, 0); printf("성공횟수: %2d", DSU);
     gotoxy(43, 0); printf("실패횟수: %2d", DF);
 
-   /* for (i = 0; i <= DM_X; i++) {
-        for (j = 0; j <= DM_Y; j++) {
-            DBCPY[j][i] = DB[j][i];
-        }
-    }*/
+    /* for (i = 0; i <= DM_X; i++) {
+         for (j = 0; j <= DM_Y; j++) {
+             DBCPY[j][i] = DB[j][i];
+         }
+     }*/
 }
 int DanceRound(void) {
 
@@ -459,25 +466,55 @@ void buttonprint1() {
         ColorSet(black, brightwhite);
     }
 }
+void buttonprint2() {
+    if (button2 == 1) {
+        ColorSet(brightwhite, black);
+        printf("▶");
+        ColorSet(black, brightwhite);
+    }
+    else {
+        ColorSet(brightwhite, brightwhite);
+        printf("  ");
+        ColorSet(black, brightwhite);
+    }
+}
 void printboard() {
     system("mode con:cols=100 lines=30");
     gotoxy(7, 20); {ColorSet(brightwhite, black); printf("start"); }
     gotoxy(7, 22); {printf("end"); ColorSet(brightwhite, brightwhite); }
+    gotoxy(7, 24); {ColorSet(brightwhite, black); printf("option"); }
     gotoxy(5, 20); buttonprint();
     gotoxy(5, 22); buttonprint1();
+    gotoxy(5, 24); buttonprint2();
 }
 void buttonmove() {
     int keyinput = 0;
-    if (kbhit()) {
-        keyinput = getch();
+    if (_kbhit()) {
+        keyinput = _getch();
         switch (keyinput) {
         case UP:
-            button = 1;
-            button1 = 0;
+            if (button2 == 1) {
+                button2 = 0;
+                button1 = 1;
+            }
+            else {
+                button = 1;
+                button1 = 0;
+            }
             break;
         case DOWN:
             button = 0;
-            button1 = 1;
+            if (button2 == 1) {
+                button2 = 1;
+            }
+            else if (button1 == 1) {
+                button1 = 0;
+                button2 = 1;
+                button = 0;
+            }
+            else {
+                button1 = 1;
+            }
             break;
         }
     }
@@ -787,4 +824,7 @@ void Mainmap()
         }
         printf("\n");
     }
+}
+void option() {
+    printf("hello");
 }
