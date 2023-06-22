@@ -1,4 +1,4 @@
-html기본 문법(태그 <open></close>)
+Hyper Text Markup Language기본 문법(태그 <open></close>)
 강조 <strong></strong>
 밑줄 <u> underline
 글씨 크기(일반적인 글씨와다르게 줄바꿈이 되고 크기가크다)
