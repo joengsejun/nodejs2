@@ -58,7 +58,7 @@ int DSF = 0;   //DanceFail
 int DSUF = True;   //DanceSuccessFlag 
 int DF;   //DanceFail
 int DG = 0;   //DanceGet
-double timer = 30;  //타이머(조정가능)
+double timer = 20;  //타이머(조정가능)
 int button = 1;
 int button1 = 0;
 int button2 = 0;
@@ -147,10 +147,10 @@ int main(void)
             DanceEnd();
             break;
         }
-        if (GetAsyncKeyState(VK_RETURN) && (button2 == 1)) {
+        if (GetAsyncKeyState(VK_RETURN) && (button1 == 1)) {
             option();
         }
-        if (GetAsyncKeyState(VK_RETURN) && (button1 == 1)) {
+        if (GetAsyncKeyState(VK_RETURN) && (button2 == 1)) {
             StartLogo();
             break;
         }
@@ -479,13 +479,15 @@ void buttonprint2() {
     }
 }
 void printboard() {
-    system("mode con:cols=100 lines=30");
     gotoxy(7, 20); {ColorSet(brightwhite, black); printf("start"); }
-    gotoxy(7, 22); {printf("end"); ColorSet(brightwhite, brightwhite); }
-    gotoxy(7, 24); {ColorSet(brightwhite, black); printf("option"); }
+    gotoxy(7, 22); {printf("option"); ColorSet(brightwhite, brightwhite); }
+    gotoxy(7, 24); {ColorSet(brightwhite, black); printf("end"); }
     gotoxy(5, 20); buttonprint();
     gotoxy(5, 22); buttonprint1();
     gotoxy(5, 24); buttonprint2();
+}
+void option() {
+    gotoxy(7, 22); printf("hello");
 }
 void buttonmove() {
     int keyinput = 0;
@@ -824,7 +826,4 @@ void Mainmap()
         }
         printf("\n");
     }
-}
-void option() {
-    printf("hello");
 }
