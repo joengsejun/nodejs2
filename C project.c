@@ -1051,19 +1051,19 @@ void DanceMap(void) {
             }
             else if (PlayMap[i][j] == 11) {
                 ColorSet(Orange, brightwhite);
-                printf("綠");
+                printf("求");
             }
             else if (PlayMap[i][j] == 12) {
                 ColorSet(Orange, brightwhite);
-                printf("陰");
+                printf("愛");
             }
             else if (PlayMap[i][j] == 13) {
                 ColorSet(Orange, brightwhite);
-                printf("芳");
+                printf("告");
             }
             else if (PlayMap[i][j] == 14) {
                 ColorSet(Orange, brightwhite);
-                printf("草");
+                printf("白");
             }
         }
         printf("\n");
