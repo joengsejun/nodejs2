@@ -20,14 +20,6 @@
 #define True 1 //참일떄
 #define False 0  //거짓일때1
 #define Fail 200 //거짓일때2
-//Beep
-#define c 1046.502//도
-#define d 1108.731//레
-#define e 1318.510//미
-#define f 1396.913//파
-#define g 1567.982//솔
-#define A 1760.000//라
-#define b 1975.533//시
 
 //화살표
 int DanceBlocks[4][4][4] = {
@@ -65,7 +57,7 @@ int DSF = 0;   //DanceFail
 int DSUF = True;   //DanceSuccessFlag 
 int DF;   //DanceFail
 int DG = 0;   //DanceGet
-double timer = 10000000;
+double timer = 29;
 int button = 1;
 int button1 = 0;
 int button2 = 0;
@@ -980,8 +972,6 @@ void Reset_DanceBoardCpy(void) {
         }
     }
 }
-
-//조정
 void DanceMap(void) {
     //맵만들기
     system("cls");
@@ -1125,7 +1115,6 @@ void DanceDrow(void) {
     gotoxy(35, 0); printf("성공횟수: %2d", DSU);
     gotoxy(43, 0); printf("실패횟수: %2d", DF);
 }
-
 int DanceRound(void) {
 
     if (0 <= DSU && DSU < 5) {
@@ -1274,10 +1263,10 @@ void DanceEnd(void) {
         //엔딩크래딧(성공)
         ending();
         Sleep(1000);
+        //애니메이션 들어갈자리
     }
     Sleep(1500);
 }
-
 void CursorView(void)
 {
     CONSOLE_CURSOR_INFO cursorInfo = { 0, };
