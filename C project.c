@@ -1216,7 +1216,6 @@ void DanceKeyinput(void) {
             }
             else if (DS[DG] != UP) {
                 DanceBreak(False, DG);
-                Beep(c, 1000);
                 timer -= 1;
                 DF += 1;
             }
@@ -1227,7 +1226,6 @@ void DanceKeyinput(void) {
             }
             else if (DS[DG] != DOWN) {
                 DanceBreak(False, DG);
-                Beep(c, 1000);
                 timer -= 1;
                 DF += 1;
             }
@@ -1238,7 +1236,6 @@ void DanceKeyinput(void) {
             }
             else if (DS[DG] != LEFT) {
                 DanceBreak(False, DG);
-                Beep(c, 1000);
                 timer -= 1;
                 DF += 1;
             }
@@ -1249,7 +1246,6 @@ void DanceKeyinput(void) {
             }
             else if (DS[DG] != RIGHT) {
                 DanceBreak(False, DG);
-                Beep(c, 1000);
                 timer -= 1;
                 DF += 1;
             }
