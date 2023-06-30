@@ -64,7 +64,7 @@ int button2 = 0;
 int check = 0;
 int maps = 0;
 int options = 0;
-int change = 0;
+int change = 10;
 int a = 0;
 
 //함수 머리 
@@ -424,17 +424,35 @@ void StartLogo()
 }
 void StartLogo2()
 {
-    system("cls");
-    On();
-    while (1) {
-        changeDIF();
-        printDIF();
-        CH();
-        if (GetAsyncKeyState(VK_ESCAPE)) {
-            break;
+    if (a = !0) {
+        system("cls");
+        if (change == 0)
+            OnEasy();
+        if (change == 1)
+            OnNormal();
+        if (change == 2)
+            OnHard();
+        if (change == 3)
+            OnExtreme();
+        while (1) {
+            changeDIF();
+            printDIF();
+            CH();
+            if (GetAsyncKeyState(VK_ESCAPE)) {
+                break;
+            }
         }
-        if (GetAsyncKeyState(VK_RETURN)) {
-            break;
+    }
+    if (a == 0) {
+        system("cls");
+        On();
+        while (1) {
+            changeDIF();
+            printDIF();
+            CH();
+            if (GetAsyncKeyState(VK_ESCAPE)) {
+                break;
+            }
         }
     }
 }
@@ -911,8 +929,8 @@ void CH() {
     if (GetAsyncKeyState(VK_RETURN) && (change == 3)) {
         OnExtreme();
         printDIF();
-        timer = 17;
-        a = 17;
+        timer = 15;
+        a = 15;
     }
 }
 
