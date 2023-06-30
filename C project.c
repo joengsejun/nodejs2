@@ -64,7 +64,7 @@ int button2 = 0;
 int check = 0;
 int maps = 0;
 int options = 0;
-int change = 10;
+int change = 0;
 int a = 0;
 
 //함수 머리 
@@ -170,6 +170,7 @@ int main(void)
 }
 
 //함수 본체
+//로고
 void logo() {
     int Logo[30][50] = {
         {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
@@ -238,6 +239,7 @@ void logo() {
 
     Sleep(2500);
 }
+//메인맵
 void Mainmap()
 {
     system("cls");
@@ -291,6 +293,7 @@ void Mainmap()
         printf("\n");
     }
 }
+//로딩창
 void Loadingmap(void) {
     //로딩창 만들기
     int Loading[30][50] = {
@@ -368,6 +371,7 @@ void Loadingmap(void) {
     }
 
 }
+//end선택시 화면
 void StartLogo()
 {
     system("cls");
@@ -422,40 +426,28 @@ void StartLogo()
             printf("\n");
     }
 }
+//난이도 조정
 void StartLogo2()
 {
-    if (a = !0) {
-        system("cls");
-        if (change == 0)
-            OnEasy();
-        if (change == 1)
-            OnNormal();
-        if (change == 2)
-            OnHard();
-        if (change == 3)
-            OnExtreme();
-        while (1) {
-            changeDIF();
-            printDIF();
-            CH();
-            if (GetAsyncKeyState(VK_ESCAPE)) {
-                break;
-            }
-        }
-    }
-    if (a == 0) {
-        system("cls");
-        On();
-        while (1) {
-            changeDIF();
-            printDIF();
-            CH();
-            if (GetAsyncKeyState(VK_ESCAPE)) {
-                break;
-            }
-        }
+    system("cls");
+    On();
+    if (change == 0)
+        OnEasy();
+    if (change == 1)
+        OnNormal();
+    if (change == 2)
+        OnHard();
+    if (change == 3)
+        OnExtreme();
+    while (1) {
+        changeDIF();
+        printDIF();
+        CH();
+        if (GetAsyncKeyState(VK_ESCAPE))
+            break;
     }
 }
+//기본 맵
 void On()
 {
     system("cls");
@@ -524,6 +516,7 @@ void On()
         printf("\n");
     }
 }
+//난이도별 맵
 void OnEasy()
 {
     system("cls");
@@ -799,6 +792,7 @@ void OnExtreme()
     }
     Sleep(1000);
 }
+//화살표 위치변경
 void changeDIF() {
     int keyinput = 0;
     if (_kbhit()) {
@@ -827,6 +821,7 @@ void changeDIF() {
         }
     }
 }
+//난이도 선택창 화살표 출력
 void printDIF() {
     int flag[5][5] = {
         {1,0,0,0,0},
@@ -869,6 +864,7 @@ void printDIF() {
         }
     }
 }
+//난이도 선택창 화살표 공백생성
 void ex() {
     if (change != 0) {
         for (int i = 0; i < 5; i++) {
@@ -907,6 +903,7 @@ void ex() {
         }
     }
 }
+//난이도 선택 출력 
 void CH() {
     if (GetAsyncKeyState(VK_RETURN) && (change == 0)) {
         OnEasy();
@@ -929,12 +926,13 @@ void CH() {
     if (GetAsyncKeyState(VK_RETURN) && (change == 3)) {
         OnExtreme();
         printDIF();
-        timer = 15;
-        a = 15;
+        timer = 17;
+        a = 17;
     }
 }
 
 
+//화살표 랜덤생성
 void DanceOutput(void) {
 
     int i, j, k;
@@ -969,6 +967,7 @@ void DanceOutput(void) {
     }
     DSUF = False;
 }
+//타이머
 int DanceTimer(void)
 {
 
@@ -983,6 +982,7 @@ int DanceTimer(void)
     if (timer <= 0)
         return Fail;
 }
+//초기화
 void Reset_DanceBoardCpy(void) {
     int i, j;
 
@@ -992,6 +992,7 @@ void Reset_DanceBoardCpy(void) {
         }
     }
 }
+//게임화면
 void DanceMap(void) {
     //맵만들기
     system("cls");
@@ -1073,26 +1074,11 @@ void DanceMap(void) {
                 ColorSet(brightpink, brightpink);
                 printf("■");
             }
-            else if (PlayMap[i][j] == 11) {
-                ColorSet(Orange, brightwhite);
-                printf("綠");
-            }
-            else if (PlayMap[i][j] == 12) {
-                ColorSet(Orange, brightwhite);
-                printf("陰");
-            }
-            else if (PlayMap[i][j] == 13) {
-                ColorSet(Orange, brightwhite);
-                printf("芳");
-            }
-            else if (PlayMap[i][j] == 14) {
-                ColorSet(Orange, brightwhite);
-                printf("草");
-            }
         }
         printf("\n");
     }
 }
+//화살표 출력
 void DanceDrow(void) {
 
     int i, j;
@@ -1135,6 +1121,7 @@ void DanceDrow(void) {
     gotoxy(35, 0); printf("성공횟수: %2d", DSU);
     gotoxy(43, 0); printf("실패횟수: %2d", DF);
 }
+//화살표개수 추가
 int DanceRound(void) {
 
     if (0 <= DSU && DSU < 5) {
@@ -1150,6 +1137,7 @@ int DanceRound(void) {
         return 8;
     }
 }
+//화살표 출력및 초기화
 void DanceBreak(int Keyinput, int num) {
 
     int i, j, k;
@@ -1210,6 +1198,7 @@ void DanceBreak(int Keyinput, int num) {
         DG = 0;
     }
 }
+//키입력
 void DanceKeyinput(void) {
 
     keyinput = 0;
@@ -1268,6 +1257,7 @@ void DanceKeyinput(void) {
         DSUF = True;
     }
 }
+//종료후 화면
 void DanceEnd(void) {
 
     if (timer <= 0)
@@ -1276,6 +1266,7 @@ void DanceEnd(void) {
         system("cls");
         //엔딩크래딧(실패)
         map();
+        Sleep(1000);
     }
     if (timer > 0) {
         maps = 2;
@@ -1284,10 +1275,10 @@ void DanceEnd(void) {
         ending();
         Sleep(1000);
     }
-    Sleep(1500);
 }
 
 
+//커서크기조정
 void CursorView(void)
 {
     CONSOLE_CURSOR_INFO cursorInfo = { 0, };
@@ -1297,6 +1288,7 @@ void CursorView(void)
 }
 
 
+//메인화면에서 버튼출력
 void buttonprint() {
     if (button == 1) {
         ColorSet(brightwhite, black);
@@ -1333,6 +1325,7 @@ void buttonprint2() {
         ColorSet(black, brightwhite);
     }
 }
+//메인화면 글자출력
 void printboard() {
     gotoxy(7, 20); {ColorSet(brightwhite, black); printf("start"); }
     gotoxy(7, 22); {printf("option"); ColorSet(brightwhite, brightwhite); }
@@ -1341,6 +1334,7 @@ void printboard() {
     gotoxy(5, 22); buttonprint1();
     gotoxy(5, 24); buttonprint2();
 }
+//버튼 움직임
 void buttonmove() {
     int keyinput = 0;
     if (_kbhit()) {
@@ -1375,6 +1369,7 @@ void buttonmove() {
 }
 
 
+//게임실패화면
 void map() {
     if (maps == 1) {
         system("cls");
@@ -1429,6 +1424,7 @@ void map() {
         }
     }
 }
+//게임 성공화면
 void ending() {
     system("cls");
     int GameClear[30][50] = {
