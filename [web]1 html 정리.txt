@@ -38,8 +38,8 @@ margin 태그와 태그사이의 여백
 여기에속하는 Apache iis nginx 등 다양한 웹서버가있다.
 go live로 웹을 연다면
 http://127.0.0.1:5500/index.html
-127.0.0.1은 자신만 가리키는 주소
 http = Hyper Text Transefer Protocol
+127.0.0.1은 자신만 가리키는 주소
 127.0.0.1 = Internet Protocol Address (ip주소)
 5500 = Port 각각의 서버마다 다린 포트가있다.
 
