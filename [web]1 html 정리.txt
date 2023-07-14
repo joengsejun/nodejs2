@@ -33,7 +33,7 @@ margin 태그와 태그사이의 여백
 <head> 와 <body> 태그를 <html>태그로 묵으면 html 파일이라지정
 <html>태그전에 <!DOCTYPE html>을 적어주면 html파일이다 라는말
 
-##이론##
+**이론**
 웹브라우저는 제품군이고 이과같이 웹서버도 제품군이 있고
 여기에속하는 Apache iis nginx 등 다양한 웹서버가있다.
 go live로 웹을 연다면
