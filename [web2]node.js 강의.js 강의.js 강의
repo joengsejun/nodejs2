@@ -1,1 +1,21 @@
 [web2]node.js 강의
+
+
+
+
+id 나
+태그 이름 으로 css 설정가능
+class = t,a,v 기타 등등 있음
+:: 이것을 사용한 가상클레스 이런게있다
+
+<div id="a" class="b">zz</div>
+css
+div {color:red};
+#a {color:blue}
+.b {color:yellow}
+
+javascript
+number = 양수 or 음수 or 0
+NaN = (오류시 출력되는애)
+string = 문자열
+let = (요즘쓰는거 예전에는 var)
