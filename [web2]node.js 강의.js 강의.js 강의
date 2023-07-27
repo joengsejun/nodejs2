@@ -15,7 +15,7 @@ div {color:red};
 .b {color:yellow}
 
 javascript
-number = 양수 or 음수 or 0
 NaN = (오류시 출력되는애)
+number = 양수 or 음수 or 0
 string = 문자열
 let = (요즘쓰는거 예전에는 var)
