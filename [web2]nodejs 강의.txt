@@ -1,8 +1,8 @@
 [web2]node.js 강의
 
-
-
-
+console.log(계산식);
+'문자' "문자열"
+'문자'.length 로쓰면 문자의 수가 출력됨
 
 앞으로필요한 코드 가져오는곳
 https://opentutorials.org/module/3549/21032
