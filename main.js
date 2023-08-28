@@ -1,11 +1,11 @@
 var http = require('http');
 var fs = require('fs');
 var app = http.createServer(function(request,response){
-    var url = request.url;x
-    if(request.url == '/'){
+    var url = request.url;
+    if(url == '/'){
       url = '/index.html';
     }
-    if(request.url == '/favicon.ico'){
+    if(url == '/favicon.ico'){
       return response.writeHead(404);
     }
     response.writeHead(200);
