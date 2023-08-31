@@ -12,7 +12,7 @@ var a = '아무\
 k8805를 안나오게하려면 \\ 대신에 \n을 사용하면 된다.
 \n은 자료상으로는 엔터가들어가진 않지만 출력시 엔터가들어간다.
 ``template literal의 처음과 끝을 나타내는 기호
-``template literal 사이에 변수를 쓸때는 &{} 을사용한다 저사이에 식을사용해도 잘나온다 \n의 경우는 그냥 엔터
+``template literal 사이에 변수를 쓸때는 &{} 을사용한다 저사이에 합차식 을사용해도 잘나온다 \n의 경우는 그냥 엔터(여담 ``을사용하면 가운데 엔터가있어도 그냥 변수속값으로 인식한다)
 http(protocol)://opentutorials.org(host(domain)):3000(port)/
 main(path)?id=HTML&page=12(query string)
 
