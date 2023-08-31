@@ -15,3 +15,9 @@ k8805를 안나오게하려면 \\ 대신에 \n을 사용하면 된다.
 ``template literal 사이에 변수를 쓸때는 &{} 을사용한다 저사이에 식을사용해도 잘나온다 \n의 경우는 그냥 엔터
 http(protocol)://opentutorials.org(host(domain)):3000(port)/
 main(path)?id=HTML&page=12(query string)
+
+CRUD
+Create
+Read
+Update
+Delete
