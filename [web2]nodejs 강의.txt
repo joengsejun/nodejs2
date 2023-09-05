@@ -22,3 +22,8 @@ Create
 Read
 Update
 Delete
+
+
+Boolean(datatype) (true 와 false 두가지 값만 존재)
+비교연산자(Comparison opreater)
+조건문(Consitional statement)
