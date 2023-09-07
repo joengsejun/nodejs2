@@ -29,3 +29,13 @@ Boolean(datatype) (true 와 false 두가지 값만 존재)
                                   true 다르다면 false)
 제어문(Flow control statements)
 조건문(Consitional statement)
+
+var args = process.argv;
+console.log(args);
+출력값:
+[
+  'C:\\Program Files\\nodejs\\node.exe',  (node.js 의 위치)
+  'C:\\Users\\User\\Desktop\\node.js\\node 변수\\conditional.js',  (실행시킨 파일의 위치)
+  'jeong',  (입력값)
+  'users'  (입력값)
+]
