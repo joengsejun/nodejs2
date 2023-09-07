@@ -5,8 +5,7 @@ var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
     var title = queryData.id;
-    
-    if (pathname == '/'){
+    if (pathname === '/'){
       fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
         var template = `<!doctype html>
         <html>
@@ -27,10 +26,10 @@ var app = http.createServer(function(request,response){
         </html>`;
         response.writeHead(200);
         response.end(template);
-      })
+      });
     }
     else {
-      response.writeHead(200);
+      response.writeHead(404);
       response.end('Not found');
     }
 });
