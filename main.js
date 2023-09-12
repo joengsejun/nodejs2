@@ -8,7 +8,9 @@ var app = http.createServer(function(request,response){
 
     if (pathname === '/'){
       if(queryData.id === undefined){
-        fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+        fs.readdir('./data',function(){
+          
+        })
           var title = 'Welcome';
           var description = 'Hello, Node.js';
           var template = `
@@ -32,7 +34,6 @@ var app = http.createServer(function(request,response){
           `;
           response.writeHead(200);
           response.end(template);
-        });
       } else {
         fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
           var title = queryData.id;
