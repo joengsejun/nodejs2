@@ -42,3 +42,12 @@ nodejs 의 동기적과 비동기적
 이름 이없는 함수(function(){ })는 익명함수 라하고 
 function a(){} 과 var a = function(){} 이것은 함수의 이름이 a인 함수 이다.
 이로써 함수는 값이라는걸 알수있다.
+
+페키지 메니저(package manager)
+pm2
+install : npm install mp2 -g
+start : pm2 start app.js (--watch : 종료시 다시실행)
+현재 pm2로 실행중인 코드보기 : pm2 monit
+현재 실행중인 프로세스 리스트보기 : pm2 list
+실행중인 프로세스 정지 : pm2 stop app
+현재 있는 문재확인 : pm2 log
