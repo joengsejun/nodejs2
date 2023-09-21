@@ -9,6 +9,7 @@ function templateHTML(title, list, body){
  <body>
  <h1><a href="/">WEB</a></h1>
  ${list}
+ <a href="/create">create</a>
  ${body}
  </body>
  </html>
@@ -55,7 +56,11 @@ var app = http.createServer(function(request,response){
         });
       });
       }
-    } else {
+    }
+    else if(pathname == '/create'){
+      
+    }
+    else {
       response.writeHead(404);
       response.end('Not found');
     }
