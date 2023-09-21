@@ -51,3 +51,5 @@ start : pm2 start app.js (--watch : 종료시 다시실행)
 현재 실행중인 프로세스 리스트보기 : pm2 list
 실행중인 프로세스 정지 : pm2 stop app
 현재 있는 문재확인 : pm2 log
+
+html에서 정보를 서버로보낼때 method="post"를 사용하면 그냥 보내는 것과 다르게 좀더 안전(?)하게 보낼수있다.
