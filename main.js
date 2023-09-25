@@ -30,6 +30,7 @@ function templateList(filelist){
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var qs = require('querystring');
 var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
@@ -75,6 +76,16 @@ var app = http.createServer(function(request,response){
       })
     }
     else if (pathname === '/create_process'){
+      var body = ' ';
+      request.on('data',function (data){
+        body += data;
+      });
+      request.on('end', function(){
+        var post = qs.parse(body);
+        var title = post.title;
+        var description = post.description;
+        console.log(post,title);
+      });
       response.writeHead(200);
       response.end('succes');
     }
