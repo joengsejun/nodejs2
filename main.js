@@ -40,18 +40,18 @@ var app = http.createServer(function(request,response){
       if(queryData.id === undefined){
         fs.readdir('./data',function(error, filelist){
           var title = 'Welcome';
-          var description = 'Hello, Node.js';
+          var discription = 'Hello, Node.js';
           var list = templateList(filelist);
-          var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+          var template = templateHTML(title, list, `<h2>${title}</h2>${discription}`);
           response.writeHead(200);
           response.end(template);
         })
       } else {
         fs.readdir('./data',function(error, filelist){
-          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, discription){
             var title = queryData.id;
             var list = templateList(filelist);
-          var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
+          var template = templateHTML(title, list, `<h2>${title}</h2>${discription}`);
           response.writeHead(200);
           response.end(template);
         });
@@ -83,7 +83,7 @@ var app = http.createServer(function(request,response){
       request.on('end', function(){
         var post = qs.parse(body);
         var title = post.title;
-        var description = post.description;
+        var discription = post.discription;
         console.log(post,title);
       });
       response.writeHead(200);
