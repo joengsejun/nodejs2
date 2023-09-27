@@ -84,10 +84,11 @@ var app = http.createServer(function(request,response){
         var post = qs.parse(body);
         var title = post.title;
         var description = post.description;
-        console.log(post,title);
+        fs.writeFile(`data/${title}`.description, 'utf8', function(err){
+          response.writeHead(200);
+          response.end('succes');
+        })
       });
-      response.writeHead(200);
-      response.end('succes');
     }
     else {
       response.writeHead(404);
