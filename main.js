@@ -78,7 +78,7 @@ var app = http.createServer(function(request,response){
     else if (pathname === '/create_process'){
       var body = ' ';
       request.on('data',function (data){
-        body = body + data;
+        body = data + body;
       });
       request.on('end', function(){
         var post = qs.parse(body);
