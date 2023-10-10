@@ -52,8 +52,8 @@ var app = http.createServer(function(request,response){
             var title = queryData.id;
             var list = templateList(filelist);
           var template = templateHTML(title, list, `<h2>${title}</h2>${description}`);
-          response.writeHead(200);
-          response.end(template);
+          response.writeHead(302, {Location: `/?id=${title}`});
+          response.end();
         });
       });
       }
