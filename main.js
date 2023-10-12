@@ -127,11 +127,12 @@ var app = http.createServer(function(request,response){
         var id = post.id;
         var title = post.title;
         var description = post.description;
-        console.log(post);
-        /*fs.writeFile(`data/${title}`, description, 'utf8', function(err){
-          response.writeHead(302,{Location: `/?id=${title}`});
-          response.end();
-        })*/
+        fs.rename(`data/${id}`,`data/${title}`,function(error){
+          fs.writeFile(`data/${title}`, description, 'utf8', function(err){
+            response.writeHead(302,{Location: `/?id=${title}`});
+            response.end();
+          })
+        });
       });
     }
     else {
