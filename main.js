@@ -159,3 +159,7 @@ var app = http.createServer(function(request,response){
     }
 });
 app.listen(3000);
+
+
+
+//명재원 바보
