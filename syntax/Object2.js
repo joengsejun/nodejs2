@@ -12,7 +12,6 @@ var o = {
 }
 o.func();
 
-//error ↓
+//error code ↓
 //var i = if(true){console.log(1)};
-
 //var w = while(true){console.log(1)};
