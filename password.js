@@ -1,3 +1,4 @@
 module.exports = {
-    id:'egoing'
+    id:'egoing',
+    pssword:'11111'
 }
