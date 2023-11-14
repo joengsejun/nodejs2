@@ -1,0 +1,32 @@
+1. Command Line Client 접속
+
+//mysql -h서버 -u아이디 -p비밀번호 데이터베이스명
+
+서버의 IP 주소가 "192.168.0.100" 이고, 아이디는 "root", 비밀번호는 "rootpassword" 이며, 접속시 바로 사용할 데이터베이스 이름이 "testdb" 라면 다음과 같이 입력합니다.
+옵션이름 -p 와 옵션값 사이에 공백을 두지 않습니다.
+(공백이 있다면 DB명으로 처리되어 버립니다.)
+
+//C:\>mysql -h192.168.0.100 -uroot -prootpassword testdb
+
+서버가 localhost (127.0.0.1) 일 경우에는 -h 옵션을 생략해도 됩니다.
+처음 DB를 바로 지정하지 않고 접속 후 지정해서 사용하려면 DB명을 생략 해도됩니다.
+
+//C:\>mysql -uroot -prootpassword
+
+보안 목적으로 입력되는 비밀번호를 다른 사람이 보지 못하게 하려면 -p 옵션에 값이 없이 사용하면 됩니다.
+비밀번호 입력 프롬프트가 나오고 입력되는 값은 *처리 됩니다.
+
+//C:\>mysql -uroot -p
+//Enter password:****
+
+이제 데이터베이스 서버에 접속이 되면 mysql> 프롬프트가 보일 것입니다.
+2. 데이터베이스의 생성 및 삭제
+
+mysql> CREATE DATABASE testdb CHARACTER utf8 COLLATE utf8_general_ci;
+
+데이터베이스 이름이 "testdb", 캐릭터 셋은 "utf8", COLLATE는 "utf8_general_ci" 인 데이터베이스가 생성됩니다.
+COLLATE는 문자열 비교시 어떻게 처리될지를 지정하는 방법이라고 생각하면 되겠습니다.
+utf8_general_ci 는 대소문자를 구분하지 않습니다.
+대소문자를 구분하려면 binary 타입으로 지정해야 합니다.
+위의 경우라면 "utf8_bin" 이 되겠습니다.
+필요에 따라 선택을 하면 되겠습니다.
