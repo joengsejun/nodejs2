@@ -28,5 +28,19 @@ mysql> CREATE DATABASE testdb CHARACTER utf8 COLLATE utf8_general_ci;
 COLLATE는 문자열 비교시 어떻게 처리될지를 지정하는 방법이라고 생각하면 되겠습니다.
 utf8_general_ci 는 대소문자를 구분하지 않습니다.
 대소문자를 구분하려면 binary 타입으로 지정해야 합니다.
-위의 경우라면 "utf8_bin" 이 되겠습니다.
-필요에 따라 선택을 하면 되겠습니다.
+위의 경우라면 "utf8_bin" 이 된다.
+
+데이터베이스 생성시 캐릭터셋과 COLLATE를 생략하면 서버 설치시 지정한 기본값으로 설정이 됩니다.
+다음 과 같이 사용된다.
+
+myaql>CREATE DATABASE testdb;
+
+데이터베이스의 삭제는 DROP 명령으로 수행함
+데이터베이스의 DROP 은 백업이 없으면 되돌릴 수 없으므로 신중히 작업해야함
+
+mysql>DROP DATABASE testdb;
+
+3. 사용자 추가 및 제거
+
+
+
