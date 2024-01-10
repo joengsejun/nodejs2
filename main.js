@@ -146,6 +146,5 @@ var app = http.createServer(function(request, response) {
         response.end('Not found');
     }
 });
-
 // 서버를 3000 포트에서 실행
 app.listen(3000);
