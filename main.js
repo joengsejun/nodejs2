@@ -4,13 +4,11 @@ var url = require('url'); // 'url' 모듈 로드
 var qs = require('querystring'); // 'querystring' 모듈 로드
 var template = require('./lib/template.js'); // 사용자 정의 모듈 로드
 var path = require('path'); // 'path' 모듈 로드
-
 // HTTP 서버 생성
 var app = http.createServer(function(request, response) {
     var _url = request.url; // 요청된 URL
     var queryData = url.parse(_url, true).query; // URL 쿼리 파라미터 추출
     var pathname = url.parse(_url, true).pathname; // URL 경로 추출
-
     // 홈페이지 루트 처리
     if (pathname === '/') {
         if (queryData.id === undefined) {
