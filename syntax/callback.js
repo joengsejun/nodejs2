@@ -1,13 +1,15 @@
+/*
 function a(){
-    console.log('A');
+  console.log('A');
 }
+*/
 var a = function(){
-    console.log('A');
-}//위 함수와 같음
+  console.log('A');
+}
 
 
 function slowfunc(callback){
-    callback();
+  callback();
 }
 
 slowfunc(a);
